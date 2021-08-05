@@ -31,7 +31,7 @@ pipeline{
         script{
           sh " echo 'in deployment stage' "
            try{
-          sh "aws ecs create-cluster --cluster-name fargate-cluster1"
+          sh "aws ecs create-cluster --cluster-name fargate-cluster"
       } catch(Exception e){
       println e
       } 
