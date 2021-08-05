@@ -10,7 +10,7 @@ pipeline{
         git branch: 'master', url: 'https://github.com/swetha8998/node-project'     
   }
 } 
- }
+ 
   
    stage('Building'){
    steps{
@@ -25,5 +25,5 @@ pipeline{
        }
    }
  }
- 
+  }
 }
