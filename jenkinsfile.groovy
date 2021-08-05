@@ -17,7 +17,8 @@ pipeline{
            sh 'aws --version'
            sh 'aws configure set region us-east-1'
            sh " aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 993745358053.dkr.ecr.us-east-1.amazonaws.com "
-        sh "docker tag ${STACKNAME}:latest ${ECR_REGISTRY}/${STACKNAME}"
+       sh "aws ecr create-repository --repository-name ${STACKNAME}"
+         sh "docker tag ${STACKNAME}:latest ${ECR_REGISTRY}/${STACKNAME}"
         sh "docker push ${ECR_REGISTRY}/${STACKNAME}"
         sh 'echo "image is pushed"'
        }
