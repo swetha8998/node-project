@@ -1,7 +1,7 @@
-final STACKNAME= 'hello-world-node'
+final STACKNAME= 'node-project'
 final ACCOUNT= '993745358053'
 def version = currentBuild.number
-
+final ECR_REGISTRY='993745358053.dkr.ecr.us-east-1.amazonaws.com'
 pipeline{
   agent any
   stages{
