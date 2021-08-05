@@ -38,7 +38,31 @@ pipeline{
            sh "aws ecs register-task-definition --cli-input-json file://taskdef.json"
    sh "aws ecs list-task-definitions"
   
-      sh "aws ecs list-services --cluster fargate-cluster1"
+      sh "aws ecs list-services --cluster fargate-cluster"
   }
 }
     }
+    
+    stage("parsing taskdefcount"){
+    steps{
+    script{
+   taskdefcount=sh(script:"aws ecs list-task-definitions --family-prefix sample-fargate",returnStdout:true)
+   //println taskdefcount
+   
+    taskdefcount= new groovy.json.JsonSlurperClassic().parseText(taskdefcount )
+    taskdefcount=taskdefcount.taskDefinitionArns.size()
+    //println "taskdefcount parsed:${taskdefcount}"
+    sh " aws ecs create-service --cluster fargate-cluster --service-name fargate-service --task-definition sample-fargate:${taskdefcount} --desired-count 1 --launch-type \"FARGATE\" --network-configuration \"awsvpcConfiguration={subnets=[subnet-4c6fb07d],securityGroups=[sg-1579811d],assignPublicIp=ENABLED}\""
+sluper =null
+      //taskdefcount=null 
+    }
+    }
+  }
+     stage("creating service"){
+    steps{
+     // sh " aws ecs create-service --cluster fargate-cluster --service-name fargate-service --task-definition sample-fargate:${taskdefcount} --desired-count 1 --launch-type \"FARGATE\" --network-configuration \"awsvpcConfiguration={subnets=[subnet-4c6fb07d],securityGroups=[sg-1579811d],assignPublicIp=ENABLED}\""
+      sh "aws ecs list-services --cluster fargate-cluster"
+    }
+     }
+  } //stages
+} //pipeline
