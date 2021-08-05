@@ -10,9 +10,7 @@ pipeline{
         git branch: 'master', url: 'https://github.com/swetha8998/node-project'     
   }
 } 
- 
-  
-   stage('Building'){
+    stage('Building'){
    steps{
        script{
            sh 'docker build . -f Dockerfile -t node-project'
