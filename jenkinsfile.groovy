@@ -20,9 +20,25 @@ pipeline{
        sh "aws ecr create-repository --repository-name ${STACKNAME}"
          sh "docker tag ${STACKNAME}:latest ${ECR_REGISTRY}/${STACKNAME}"
         sh "docker push ${ECR_REGISTRY}/${STACKNAME}"
+         sh "docker rmi ${ECR_REGISTRY} ${STACKNAME}"
         sh 'echo "image is pushed"'
+         
        }
    }
  }
+    stage('deployment'){
+      steps{
+        script{
+          sh " echo 'in deployment stage' "
+           try{
+          sh "aws ecs create-cluster --cluster-name fargate-cluster1"
+      } catch(Exception e){
+      println e
+      } 
+           sh "aws ecs register-task-definition --cli-input-json file://taskdef.json"
+   sh "aws ecs list-task-definitions"
+  
+      sh "aws ecs list-services --cluster fargate-cluster1"
   }
 }
+    }
