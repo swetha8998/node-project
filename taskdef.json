@@ -4,8 +4,8 @@
    "executionRoleArn":"arn:aws:iam::993745358053:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
-            "name": "fargate-app", 
-            "image": "993745358053.dkr.ecr.us-east-1.amazonaws.com/node-project", 
+            "name": "node", 
+            "image": "993745358053.dkr.ecr.us-east-1.amazonaws.com/node", 
 		   "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
