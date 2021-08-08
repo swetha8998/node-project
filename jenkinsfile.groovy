@@ -1,4 +1,4 @@
-final STACKNAME= 'node-project'
+final STACKNAME= 'node-projct'
 final ACCOUNT= '993745358053'
 def version = currentBuild.number
 final ECR_REGISTRY='993745358053.dkr.ecr.us-east-1.amazonaws.com'
@@ -13,7 +13,7 @@ pipeline{
     stage('Building'){
    steps{
        script{
-           sh 'docker build . -f Dockerfile -t node-project'
+           sh 'docker build . -f Dockerfile -t node-projct'
            sh 'aws --version'
            sh 'aws configure set region us-east-1'
            sh " aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 993745358053.dkr.ecr.us-east-1.amazonaws.com "
