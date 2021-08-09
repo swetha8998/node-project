@@ -6,15 +6,7 @@
         {
             "name": "m-build", 
             "image": "993745358053.dkr.ecr.us-east-1.amazonaws.com/manual-build", 
-		   "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/sample-f",
-          "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-            "portMappings": [
+	    "portMappings": [
                 {
                     "containerPort": 8070, 
                     "hostPort": 8070, 
