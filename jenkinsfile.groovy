@@ -60,8 +60,9 @@ pipeline{
     taskdefcount= new groovy.json.JsonSlurperClassic().parseText(taskdefcount )
     taskdefcount=taskdefcount.taskDefinitionArns.size()
     //println "taskdefcount parsed:${taskdefcount}"
-    sh " aws ecs create-service --cluster fargate-cluster --service-name fargate-service --task-definition sample-fargate:${taskdefcount} --desired-count 1 --launch-type \"FARGATE\" --network-configuration \"awsvpcConfiguration={subnets=[subnet-4c6fb07d],securityGroups=[sg-1579811d],assignPublicIp=ENABLED}\""
-sluper =null
+  //  sh " aws ecs create-service --cluster fargate-cluster --service-name fargate-service --task-definition sample-fargate:${taskdefcount} --desired-count 1 --launch-type \"FARGATE\" --network-configuration \"awsvpcConfiguration={subnets=[subnet-4c6fb07d],securityGroups=[sg-1579811d],assignPublicIp=ENABLED}\""
+sh " aws ecs create-service --cluster fargate-cluster --service-name fargate-service --task-definition sample-fargate:1 --desired-count 1 --launch-type \"FARGATE\" --network-configuration \"awsvpcConfiguration={subnets=[subnet-4c6fb07d],securityGroups=[sg-1579811d],assignPublicIp=ENABLED}\""
+      sluper =null
       //taskdefcount=null 
     }
     }
