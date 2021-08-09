@@ -5,7 +5,7 @@
     "containerDefinitions": [
         {
             "name": "m-build", 
-            "image": "993745358053.dkr.ecr.us-east-1.amazonaws.com/manual-build", 
+            "image": "993745358053.dkr.ecr.us-east-1.amazonaws.com/pro", 
 	    "portMappings": [
                 {
                     "containerPort": 8070, 
