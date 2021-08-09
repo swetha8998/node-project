@@ -13,17 +13,18 @@ pipeline{
     stage('Building'){
    steps{
        script{
-         sh 'aws configure set region us-east-1'
-           sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 993745358053.dkr.ecr.us-east-1.amazonaws.com'
-           sh 'docker build -t node .'
-           sh 'aws --version'
+//          sh 'aws configure set region us-east-1'
+//            sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 993745358053.dkr.ecr.us-east-1.amazonaws.com'
+//            sh 'docker build -t node .'
+//            sh 'aws --version'
                    
-       sh "aws ecr create-repository --repository-name ${STACKNAME}"
+//        sh "aws ecr create-repository --repository-name ${STACKNAME}"
          
-         sh 'docker tag node:latest 993745358053.dkr.ecr.us-east-1.amazonaws.com/node:latest'
-        sh "docker push 993745358053.dkr.ecr.us-east-1.amazonaws.com/node:latest"
-         //sh "docker rmi ${ECR_REGISTRY} ${STACKNAME}"
-        sh 'echo "image is pushed"'
+//          sh 'docker tag node:latest 993745358053.dkr.ecr.us-east-1.amazonaws.com/node:latest'
+//         sh "docker push 993745358053.dkr.ecr.us-east-1.amazonaws.com/node:latest"
+//          //sh "docker rmi ${ECR_REGISTRY} ${STACKNAME}"
+//         sh 'echo "image is pushed"'
+         sh 'echo "create a repository and push a image"'
          
        }
    }
@@ -31,6 +32,10 @@ pipeline{
     stage('deployment'){
       steps{
         script{
+          timeout(time: 15, unit: "MINUTES") {
+    input message: 'Do you want to  deploy it ?', ok: 'Yes'
+
+  }
           sh " echo 'in deployment stage' "
            try{
           sh "aws ecs create-cluster --cluster-name fargate-cluster"
