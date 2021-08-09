@@ -42,6 +42,8 @@ pipeline{
       } catch(Exception e){
       println e
       } 
+          def NAME = System.console().readLine 'What is the container name? '
+          def IMAGE = System.console().readLine 'enter the image '
            sh "aws ecs register-task-definition --cli-input-json file://taskdef.json"
    sh "aws ecs list-task-definitions"
   
